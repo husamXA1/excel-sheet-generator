@@ -5,6 +5,14 @@ tableExists = false
 
 const generateTable = () => {
     let rowsNumber = parseInt(rows.value), columnsNumber = parseInt(columns.value)
+    if (!rowsNumber || !columnsNumber) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'You can\'t create a table with these values.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        })
+    }
     table.innerHTML = ""
     for(let i=0; i<rowsNumber; i++){
         var tableRow = ""
@@ -20,6 +28,12 @@ const generateTable = () => {
 
 const ExportToExcel = (type, fn, dl) => {
     if(!tableExists){
+        Swal.fire({
+            title: 'Error!',
+            text: 'You can\'t export a non-existing table.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        })
         return
     }
     var elt = table
